@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#546fff</color>
+    <color name="colorText">#222f3e</color>
+    <color name="colorBackground">#f3f3f3</color>
+    <color name="colorMarker">#eb4034</color>
+    <color name="colorTextTitle">#68729c</color>
+    <color name="colorSuccess">#2cde53</color>
+    <color name="colorShadow">#68729c</color>
+    <color name="colorPlaceHolder">#babec2</color>
+    <color name="colorGrey">#e4e6f0</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDanger">#eb4034</color>
+    <color name="colorCardBackground">#FFFFFF</color>
+    <color name="colorFirstMarker">#222f3e</color>
+    <color name="colorInfoWindow">#ffffff</color>
+
+
+    <color name="colorDarkPrimary">#2c3b4d</color>
+    <color name="colorDarkPrimaryDark">#2c3b4d</color>
+    <color name="colorDarkAccent">#8598ff</color>
+    <color name="colorDarkCardBackground">#374457</color>
+    <color name="colorDarkShadow">#192533</color>
+    <color name="colorDarkText">#f5f6fc</color>
+    <color name="colorDarkPlaceHolder">#5b6e85</color>
+    <color name="colorDarkInfoWindow">#344457</color>
+    <color name="colorDarkBackground">#344457</color>
+    <color name="colorDarkMarker">#eb4034</color>
+    <color name="colorDarkDanger">#ff8a82</color>
+    <color name="colorDarkWhite">#2c3b4d</color>
+    <color name="colorDarkTextTitle">#e4e6f0</color>
+    <color name="colorDarkSuccess">#2cde53</color>
+    <color name="colorDarkGrey">#3c4c5e</color>
+    <color name="colorDarkFirstMarker">#f0f6ff</color>
+</resources>

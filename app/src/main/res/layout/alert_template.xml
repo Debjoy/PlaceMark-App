@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        xmlns:card="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card:cardBackgroundColor="?attr/colorPrimary"
+        card:cardCornerRadius="10dp"
+        card:cardElevation="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="30dp"
+                android:paddingHorizontal="25dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_bookmark_black_24dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/alert_title_logo"/>
+
+                <TextView
+                    android:id="@+id/alert_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/alert_title_logo"
+                    android:text="Save Marker As"
+                    android:textColor="?attr/colorTextTitle"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+                <Button
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/alert_close"
+                    android:backgroundTint="?attr/colorTextTitle"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/ic_close_black_24dp"/>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="25dp">
+                <TextView
+                    android:id="@+id/alert_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This is a demo text, demo texts are awesome."
+                    android:textColor="?attr/colorTextTitle"
+                    android:textSize="17sp"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:paddingHorizontal="25dp">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:minWidth="0dp"
+                    android:id="@+id/alert_confirm"
+                    android:layout_alignParentRight="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:textSize="17sp"
+                    android:paddingHorizontal="5dp"
+                    android:textAllCaps="false"
+                    android:text="CONFIRM"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

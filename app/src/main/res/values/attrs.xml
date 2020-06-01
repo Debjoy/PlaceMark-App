@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorText" format="color"/>
+    <attr name="colorBackground" format="color"/>
+    <attr name="colorMarker" format="color"/>
+    <attr name="colorTextTitle" format="color"/>
+    <attr name="colorSuccess" format="color"/>
+    <attr name="colorGrey" format="color"/>
+    <attr name="colorWhite" format="color"/>
+    <attr name="colorFirstMarker" format="color" />
+    <attr name="colorCardBackground" format="color" />
+    <attr name="colorShadow" format="color"/>
+    <attr name="colorDanger" format="color"/>
+    <attr name="colorInfoWindow" format="color"/>
+    <attr name="colorPlaceHolder" format="color"/>
+</resources>

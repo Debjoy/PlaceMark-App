@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/alert_save_root"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        xmlns:card="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card:cardCornerRadius="10dp"
+        card:cardBackgroundColor="?attr/colorBackground"
+        card:cardElevation="5dp"
+        ><LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="30dp"
+                android:background="?attr/colorWhite"
+                android:paddingHorizontal="25dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_bookmark_black_24dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/alert_save_title_logo"/>
+
+                <TextView
+                    android:id="@+id/alert_save_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/alert_save_title_logo"
+                    android:text="Save Marker As"
+                    android:textColor="?attr/colorTextTitle"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+                <Button
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/alert_save_close"
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="?attr/colorTextTitle"
+                    android:background="@drawable/ic_close_black_24dp"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="20dp"
+                android:paddingHorizontal="25dp"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select Emoji:"
+                            android:layout_marginRight="20dp"
+                            android:textColor="?attr/colorText"/>
+
+                        <com.vanniktech.emoji.EmojiTextView
+                            android:id="@+id/alert_save_emoji_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🍋"
+                            android:textSize="35dp" />
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select Color:  "
+                            android:layout_marginRight="20dp"
+                            android:textColor="?attr/colorText"/>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="40dp"
+                            android:minHeight="40dp"
+                            android:id="@+id/alert_save_color"
+                            android:background="@drawable/circular_view"
+                            android:backgroundTint="?attr/colorFirstMarker"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
+                        <ImageView
+                            android:id="@+id/alert_save_marker_body"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/marker"
+                            android:backgroundTint="?attr/colorFirstMarker"
+                            android:layout_centerHorizontal="true"/>
+                        <com.vanniktech.emoji.EmojiTextView
+                            android:id="@+id/alert_save_emoji_preview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🍋"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="33sp"
+                            android:layout_marginTop="10dp"/>
+                        <com.vanniktech.emoji.EmojiEditText
+                            android:visibility="gone"
+                            android:maxWidth="0dp"
+                            android:background="@android:color/transparent"
+                            android:textCursorDrawable="@android:color/transparent"
+                            android:id="@+id/alert_emojiEditText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Preview"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorText"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_remove_red_eye_black_24dp"
+                        android:drawableTint="?attr/colorAccent"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="25dp"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable emojies in this marker"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="?attr/colorText"/>
+            <Switch
+                android:id="@+id/alert_save_emoji_enable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:checked="true"
+                />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="25dp"
+            android:paddingBottom="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Marker Title"
+                android:textColor="?attr/colorText"
+                android:layout_marginBottom="10dp"/>
+            <EditText
+                android:id="@+id/alert_save_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_edit_text"
+                android:hint="eg. Lemon Shop"
+                android:textSize="17sp"
+                android:textColor="?attr/colorTextTitle"
+                android:textColorHint="?attr/colorPlaceHolder"
+                android:paddingVertical="15dp"
+                android:paddingHorizontal="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="25dp"
+            android:paddingBottom="30dp"
+            android:gravity="end">
+            <Button
+                android:id="@+id/alert_save_marker_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="?attr/colorAccent"
+                android:text="Done"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:paddingHorizontal="20dp"/>
+                <!--android:drawableRight="@drawable/ic_bookmark_black_24dp"-->
+                <!--android:drawableTint="@android:color/white"-->
+        </LinearLayout>
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

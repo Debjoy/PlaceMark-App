@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="fab_current_location" type="id" />
+    <item name="fab_selected_location" type="id" />
+    <item name="fab_edit_location" type="id" />
+    <item name="fab_delete_location" type="id" />
+
+
+</resources>
