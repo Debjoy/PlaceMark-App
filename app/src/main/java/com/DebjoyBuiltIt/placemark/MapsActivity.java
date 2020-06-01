@@ -29,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -498,7 +499,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if(selectedMarker!=null)
                     selectedMarker.remove();
                 selectedMarker=mMap.addMarker(new MarkerOptions().position(currentLocation)
-                        .title("New Marker")
+                        .title("Untitled")
                         .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(mContext, marker)))
                 );
                 selectedMarker.setDraggable(true);
@@ -885,6 +886,40 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mUiSettings.setMapToolbarEnabled(false);
         mUiSettings.setCompassEnabled(true);
+
+        Intent intent=getIntent();
+        Uri uri=intent.getData();
+        if(uri!=null){
+            String schemeSpecificPart=uri.getSchemeSpecificPart();
+            String uriFirstPart=schemeSpecificPart.split("[?]")[0];
+            double latitudeIntent=Double.parseDouble(uriFirstPart.split(",")[0]);
+            double longitudeIntent=Double.parseDouble(uriFirstPart.split(",")[1]);
+            LatLng latLng=new LatLng(latitudeIntent,longitudeIntent);
+            if(!speedDialView.getActionItems().contains(saveMarkerFab))
+                speedDialView.addActionItem(saveMarkerFab);
+            if(speedDialView.getActionItems().contains(deleteMarkerFab))
+                speedDialView.removeActionItemById(R.id.fab_delete_location);
+            if(speedDialView.getActionItems().contains(editMarkerFab))
+                speedDialView.removeActionItemById(R.id.fab_edit_location);
+
+            markerId=-1;
+            if(mMap.getCameraPosition().zoom<=15.0)
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17),1000,null);
+            else
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng),400,null);
+
+            View marker = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
+
+            ((EmojiTextView)marker.findViewById(R.id.emojicon_icon)).setText("");
+            if(selectedMarker!=null)
+                selectedMarker.remove();
+            selectedMarker=mMap.addMarker(new MarkerOptions().position(latLng)
+                    .title("Untitled")
+                    .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(mContext, marker)))
+            );
+            selectedMarker.setDraggable(true);
+        }
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -903,7 +938,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if(selectedMarker!=null)
                 selectedMarker.remove();
                 selectedMarker=mMap.addMarker(new MarkerOptions().position(latLng)
-                        .title("New Marker")
+                        .title("Untitled")
                         .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(mContext, marker)))
                 );
                 selectedMarker.setDraggable(true);
@@ -1019,7 +1054,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if(selectedMarker!=null)
             selectedMarker.remove();
         selectedMarker=mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(),location.getLongitude()))
-                .title("New Marker")
+                .title("Untitled")
                 .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(mContext, marker)))
         );
         selectedMarker.setDraggable(true);
