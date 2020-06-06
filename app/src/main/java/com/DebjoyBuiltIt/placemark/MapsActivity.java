@@ -5,6 +5,7 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -27,6 +28,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -75,7 +78,9 @@ import com.vanniktech.emoji.EmojiPopup;
 import com.vanniktech.emoji.EmojiTextView;
 import com.vanniktech.emoji.twitter.TwitterEmojiProvider;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import io.realm.Realm;
@@ -966,6 +971,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         mMap.setOnMapLoadedCallback(this);
 
+        List<Address> addressList=null;
+        Geocoder geocoder=new Geocoder(MapsActivity.this);
+        try {
+            addressList=geocoder.getFromLocationName("Damodar",5);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.i("DEBJOY",addressList.size()+"");
     }
     @Override
     public void onMapLoaded() {
@@ -1125,6 +1138,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_items, menu);
         MenuItem themeToggle=menu.findItem(R.id.menu_item);
+        MenuItem searchToggle=menu.findItem(R.id.search_icon);
         if(DARK_THEME) {
             themeToggle.setIcon(ContextCompat.getDrawable(mContext, R.drawable.ic_brightness_7_black_24dp));
             Drawable ImageViewDrawable1 = themeToggle.getIcon();
@@ -1136,6 +1150,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             DrawableCompat.setTint(ImageViewDrawable1, mColorTextTitle.getDefaultColor());
             themeToggle.setIcon(ImageViewDrawable1);
         }
+
+        Drawable ImageViewDrawable1 = searchToggle.getIcon();
+        DrawableCompat.setTint(ImageViewDrawable1, mColorTextTitle.getDefaultColor());
+        searchToggle.setIcon(ImageViewDrawable1);
+        final SearchView searchView = (SearchView)searchToggle.getActionView();
+        searchView.setQueryHint("Search Location");
+        searchView.color
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(mContext, "query", Toast.LENGTH_SHORT).show();
+                searchView.setIconified(true);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
     }
     @Override
