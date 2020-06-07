@@ -26,6 +26,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.location.Address;
@@ -53,6 +54,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -79,6 +81,7 @@ import com.vanniktech.emoji.EmojiTextView;
 import com.vanniktech.emoji.twitter.TwitterEmojiProvider;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -115,9 +118,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ColorStateList mColorMarker;
     private ColorStateList mColorWhite;
     private ColorStateList mColorDanger;
+    private ColorStateList mColorPlaceHolder;
 
     private boolean DARK_THEME=false;
 
+    private List<Address> addressList;
 
     private ImageView notifyItem;
 
@@ -971,14 +976,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         mMap.setOnMapLoadedCallback(this);
 
-        List<Address> addressList=null;
-        Geocoder geocoder=new Geocoder(MapsActivity.this);
-        try {
-            addressList=geocoder.getFromLocationName("Damodar",5);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Log.i("DEBJOY",addressList.size()+"");
+
     }
     @Override
     public void onMapLoaded() {
@@ -1138,7 +1136,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_items, menu);
         MenuItem themeToggle=menu.findItem(R.id.menu_item);
-        MenuItem searchToggle=menu.findItem(R.id.search_icon);
+        final MenuItem searchToggle=menu.findItem(R.id.search_icon);
         if(DARK_THEME) {
             themeToggle.setIcon(ContextCompat.getDrawable(mContext, R.drawable.ic_brightness_7_black_24dp));
             Drawable ImageViewDrawable1 = themeToggle.getIcon();
@@ -1156,12 +1154,63 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         searchToggle.setIcon(ImageViewDrawable1);
         final SearchView searchView = (SearchView)searchToggle.getActionView();
         searchView.setQueryHint("Search Location");
-        searchView.color
+
+        EditText editText = ((EditText) searchView.findViewById(R.id.search_src_text));
+        editText.setHintTextColor(mColorPlaceHolder.getDefaultColor());
+        editText.setTextColor(mColorTextTitle.getDefaultColor());
+        ImageView searchClose = searchView.findViewById(R.id.search_close_btn);
+        searchClose.setImageTintList(mColorTextTitle);
+
+
+        final Geocoder geocoder=new Geocoder(MapsActivity.this);
+        addressList=null;
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(mContext, "query", Toast.LENGTH_SHORT).show();
-                searchView.setIconified(true);
+                searchToggle.collapseActionView();
+                addressList=new ArrayList<>();
+                try {
+                    addressList=geocoder.getFromLocationName(query,5);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(addressList.size()==0)
+                    Toast.makeText(mContext, "Location not found", Toast.LENGTH_SHORT).show();
+                else {
+                    Log.i("DEBJOY",addressList+"");
+                    Address address=addressList.get(0);
+                    if(address.hasLatitude() && address.hasLongitude()){
+                        LatLng latLng=new LatLng(address.getLatitude(),address.getLongitude());
+                        if(!speedDialView.getActionItems().contains(saveMarkerFab))
+                            speedDialView.addActionItem(saveMarkerFab);
+                        if(speedDialView.getActionItems().contains(deleteMarkerFab))
+                            speedDialView.removeActionItemById(R.id.fab_delete_location);
+                        if(speedDialView.getActionItems().contains(editMarkerFab))
+                            speedDialView.removeActionItemById(R.id.fab_edit_location);
+
+                        markerId=-1;
+
+                        View marker = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
+
+                        ((EmojiTextView)marker.findViewById(R.id.emojicon_icon)).setText("");
+                        if(selectedMarker!=null)
+                            selectedMarker.remove();
+                        selectedMarker=mMap.addMarker(new MarkerOptions().position(latLng)
+                                .title(address.getAddressLine(0))
+                                .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(mContext, marker)))
+                        );
+                        selectedMarker.setDraggable(true);
+                        if(mMap.getCameraPosition().zoom<=15.0)
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedMarker.getPosition(),17),1000,null);
+                        else
+                            mMap.animateCamera(CameraUpdateFactory.newLatLng(selectedMarker.getPosition()),400,null);
+                        slidingPaneLayout.setPanelState(COLLAPSED);
+                        selectedMarker.showInfoWindow();
+                    }else
+                        Toast.makeText(mContext, "Data incomplete", Toast.LENGTH_SHORT).show();
+
+                }
                 return false;
             }
 
@@ -1170,6 +1219,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return false;
             }
         });
+
+
         return true;
     }
     @Override
@@ -1299,6 +1350,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         temp.recycle();
         temp = mContext.obtainStyledAttributes(styleResId, new int[] { R.attr.colorDanger});
         mColorDanger = temp.getColorStateList(0);
+        temp.recycle();
+        temp = mContext.obtainStyledAttributes(styleResId, new int[] { R.attr.colorPlaceHolder});
+        mColorPlaceHolder = temp.getColorStateList(0);
         temp.recycle();
     }
 }

@@ -24,6 +24,8 @@
         <item name="emojiIcons">@color/colorShadow</item>
         <item name="emojiDivider">@color/colorGrey</item>
 
+        <item name="actionBarTheme">@style/MyApp.ActionBarTheme</item>
+
         <item name="android:actionBarStyle">@style/MyLightActionBar</item>
         <item name="actionBarStyle">@style/MyLightActionBar</item>
 
@@ -32,6 +34,10 @@
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:navigationBarColor" >@color/colorPrimary</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+    <style name="MyApp.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- THIS is where you can color the arrow! -->
+        <item name="colorControlNormal">@color/colorTextTitle</item>
     </style>
     <style name="MyLightActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
         <item name="android:background">@color/colorPrimary</item>
@@ -95,6 +101,8 @@
         <item name="emojiBackground">@color/colorDarkShadow</item>
         <item name="emojiIcons">@color/colorDarkGrey</item>
         <item name="emojiDivider">@color/colorDarkGrey</item>
+
+
 
         <item name="android:actionBarStyle">@style/MyDarkActionBar</item>
         <item name="actionBarStyle">@style/MyDarkActionBar</item>
