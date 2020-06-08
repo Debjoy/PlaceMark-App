@@ -1178,7 +1178,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if(addressList.size()==0)
                     Toast.makeText(mContext, "Location not found", Toast.LENGTH_SHORT).show();
                 else {
-                    Log.i("DEBJOY",addressList+"");
                     Address address=addressList.get(0);
                     if(address.hasLatitude() && address.hasLongitude()){
                         LatLng latLng=new LatLng(address.getLatitude(),address.getLongitude());
