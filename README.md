@@ -10,6 +10,7 @@ PlaceMark is an Android App where you can bookmark any location which you want t
 
 ## About
 <img src="/readme/logo.png" width="200" hspace="10" vspace="10" align="left">  This app will help users to bookmark a location so that the user  can find the location later. Sometimes it might happen an has recently moved to a location and is searching shops and stores to know where the can get access to day to day stuffs as not everything is searchable in google maps . As they find these places, they can bookmark these places so that next time the user don't have to search for it. Also If someone shares their location over any messaging platform the user can directly click on that location to mark that place in the PlaceMark app. 
+<br><br><br>
 
 ## Features
 
