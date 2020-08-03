@@ -36,6 +36,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -146,6 +147,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedpreferences = getSharedPreferences("PlaceMarkApp", Context.MODE_PRIVATE);
+
+
+        // Check if we need to display our OnboardingSupportFragment
+        if (!sharedpreferences.getBoolean("ONBOARD", false)) {
+            // The user hasn't seen the OnboardingSupportFragment yet, so show it
+            startActivity(new Intent(this, IntroActivity.class));
+        }
+
         DARK_THEME=sharedpreferences.getBoolean("DarkTheme",false);
         //DARK_THEME=false;//Toggle this to change theme
         if(DARK_THEME)

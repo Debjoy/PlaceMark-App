@@ -29,7 +29,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
+        <activity android:name=".IntroActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar.Launcher"/>
         <activity
             android:name="com.DebjoyBuiltIt.placemark.MapsActivity"
             android:noHistory="true"

@@ -30,6 +30,7 @@ dependencies {
     implementation 'com.vanniktech:emoji-twitter:0.6.0'
     implementation 'petrov.kristiyan:colorpicker-library:1.1.10'
     implementation 'com.basgeekball:awesome-validation:4.2'
+    implementation 'com.github.chyrta:AndroidOnboarder:0.7'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
